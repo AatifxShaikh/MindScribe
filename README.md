@@ -22,7 +22,7 @@ These instructions will help you set up and run the MindScribe app on your local
 ### Installation
 
 1. Clone the repository to your local machine:
- git clone https://github.com/AatifxShaikh/Notes.git
+ git clone https://github.com/AatifxShaikh/MindScribe.git
 
 2.Naviagte to project directory
 
@@ -33,7 +33,7 @@ These instructions will help you set up and run the MindScribe app on your local
 Usage
 Click the "Add notes" button on the homepage to create a new note.
 Fill in the title and content for your note and click "Save Note."
-Your note will be added to the homepage with options to view, edit, or delete it.
+Your note will be added to the homepage with options to view, edit, or delete,copy and share it.
 Use the search bar to filter notes by title or content.
 
 Contributing
