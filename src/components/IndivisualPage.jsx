@@ -7,10 +7,10 @@ const IndivisualPage = ({ notes, deleteNote }) => {
     if (!notes) {
         return <div>Loading...</div>;
     }
-    const Navigate = useNavigate()
+    const navigate = useNavigate()
     const handleCick = () => {
         deleteNote(note.id)
-        Navigate('/')
+        navigate('/')
     }
     return (
         <div className="container mx-auto py-8">
