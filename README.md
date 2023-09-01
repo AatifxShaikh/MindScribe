@@ -6,7 +6,7 @@ MindScribe is a simple and intuitive note-taking application that allows you to 
 
 ## Features
 
-- Create, edit, and delete notes.
+- Create, edit, and delete ,copy to clipboard and share your notes.
 - Organize your notes with titles and content.
 - Search for specific notes using a search bar.
 - Responsive design for seamless use on various devices.
