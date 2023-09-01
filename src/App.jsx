@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Home from './components/Home'
 import Form from './components/Form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import IndivisualPage from './components/IndivisualPage'
 import EditPage from './components/EditPage'
-import Footer from './components/Footer'
+import Shareable from './components/Shareable'
+
 import './App.css'
 const App = () => {
     const initialNotes = JSON.parse(localStorage.getItem('notes')) || []
@@ -24,12 +25,24 @@ const App = () => {
         const updatedNotes = notes.map((note) => (note.id === updatedNote.id ? updatedNote : note))
         setNotes(updatedNotes)
     }
+    const handleCopyToClipBoard = () => {
+        const texttoCopy = notes[0].content.toString()
+        console.log(notes[0].content);
+        navigator.clipboard.writeText(texttoCopy)
+            .then(() => {
+                console.log("Text copied to clipBoard", texttoCopy);
+            })
+            .catch((err) => {
+                console.error("Failed to copy text:", err)
+            })
+    }
+
     console.log(notes);
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Home notes={notes} deleteNote={deleteNote} />,
-            errorElement: <Error />
+            element: <Home notes={notes} deleteNote={deleteNote} handleCopyToClipBoard={handleCopyToClipBoard} />,
+            // errorElement: <Error />
         },
         {
             path: "/Form",
@@ -37,13 +50,21 @@ const App = () => {
         },
         {
             path: "/note/:id",
-            element: <IndivisualPage notes={notes} deleteNote={deleteNote} />
+            element: <IndivisualPage notes={notes} deleteNote={deleteNote} handleCopyToClipBoard={handleCopyToClipBoard} />
 
         },
         {
             path: "/note/:id/edit",
             element: <EditPage notes={notes} updateNote={updateNote} />
         },
+        {
+            path: "/share/:noteId",
+            element: <Shareable notes={notes} />
+        },
+        {
+            path: "/share/*",
+            element: <App />
+        }
         // {
         //     path: '',
         //     element: <Footer />
