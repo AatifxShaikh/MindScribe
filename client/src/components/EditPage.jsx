@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router'
 import { useState } from 'react'
 const EditPage = ({ notes, updateNote }) => {
     const { id } = useParams()
-    const note = notes.find((note) => note.id === parseInt(id))
+    const note = notes.find((note) => note.id === id)
     const navigate = useNavigate()
     const [updatedTitle, setUpdatedTitle] = useState(note.title)
     const [updatedContent, setUpdatedContent] = useState(note.content)

@@ -14,7 +14,7 @@ const Form = ({ addNote }) => {
     }
     const handleSaveNote = () => {
         const newNote = {
-            id: Date.now(),
+            id: Date.now().toString(),
             title: title,
             content: notes,
         }

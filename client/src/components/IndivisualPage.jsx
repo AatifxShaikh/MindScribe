@@ -5,7 +5,9 @@ import ClipboardJS from "clipboard";
 import { ClipboardCopyIcon, ShareIcon } from "@heroicons/react/solid";
 const IndivisualPage = ({ notes, deleteNote, handleCopyToClipBoard }) => {
     const { id } = useParams()
-    const note = notes.find((note) => note.id === parseInt(id))
+    console.log();
+    const note = notes.find((note) => note.id === id)
+    console.log(note)
     if (!notes) {
         return <div>Loading...</div>;
     }

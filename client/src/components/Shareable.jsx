@@ -2,27 +2,30 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const ShareableNote = ({ notes }) => {
+const ShareableNote = () => {
     const { noteId } = useParams();
     const [note, setNote] = useState(null); // State to hold the shared note
     const [loading, setLoading] = useState(true); // State to track loading status
     const [error, setError] = useState(null); // State to handle errors
 
     useEffect(() => {
-        // Find the shared note in your notes data based on the noteId.
-        const sharedNote = notes.find((n) => n.id.toString() === noteId.toString()
-        );
-        console.log(sharedNote)
-        console.log(noteId);
-        console.log(notes);
-        if (sharedNote) {
-            setNote(sharedNote);
-            setLoading(false);
-        } else {
-            setError('Note not found');
-            setLoading(false);
-        }
-    }, [noteId, notes]);
+        // Make a request to the server to fetch the shared note by its ID (noteId)
+        fetch(`http://localhost:3000/api/notes/${noteId}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Note not found');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setNote(data); // Set the fetched note to the state
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, [noteId]);
 
     if (loading) {
         return <div>Loading...</div>;
