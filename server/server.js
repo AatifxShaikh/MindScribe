@@ -1,17 +1,17 @@
-// server.js
+
 
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // For handling CORS (Cross-Origin Resource Sharing)
+const cors = require('cors'); 
 const { ObjectId } = require('mongodb');
 const { PORT = 3000 } = process.env;
 
 const app = express();
 app.use(express.json());
-app.use(cors()); // Enable CORS for all routes
+app.use(cors()); 
 console.log(process.env.MONGO_URI)
-// Connect to MongoDB
+
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -25,7 +25,7 @@ mongoose.connection.on('error', (err) => {
     console.error('MongoDB connection error:', err);
 });
 
-// Define a mongoose schema for your notes
+
 const noteSchema = new mongoose.Schema({
     id: String,
     title: String,
@@ -34,19 +34,18 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema);
 
-// Route to handle POST request to add a new note
+
 app.post('/api/notes', async (req, res) => {
     try {
         const { id, title, content } = req.body;
 
-        // Create a new note document
+       
         const newNote = new Note({
             id: id,
             title,
             content,
         });
 
-        // Save the new note to the database
         await newNote.save();
 
         res.status(201).json(newNote);
@@ -55,7 +54,7 @@ app.post('/api/notes', async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
-// Add this route for deleting a note
+
 app.delete('/api/notes/:id', async (req, res) => {
     try {
         const noteId = req.params.id;
@@ -67,28 +66,23 @@ app.delete('/api/notes/:id', async (req, res) => {
             res.status(204).end();
         } else {
             res.status(404).json({ error: 'Note not found' });
-        } // 204 No Content indicates a successful deletion
+        } 
     } catch (err) {
         console.error('Error deleting note:', err);
         res.status(500).json({ error: err.message });
     }
 });
 
-
-
-
-// Add this route for updating a note
-// Add this route for updating a note
 app.put('/api/notes/:id', async (req, res) => {
     try {
         const noteId = req.params.id;
         const { title, content } = req.body;
 
-        // Find the note by ID and update it
+       
         const updatedNote = await Note.findOneAndUpdate(
-            { id: noteId }, // Find the note by id
-            { title, content }, // Update the title and content
-            { new: true } // Return the updated note
+            { id: noteId }, 
+            { title, content }, 
+            { new: true }
         );
 
         if (updatedNote) {
@@ -105,7 +99,7 @@ app.get('/api/notes/:id', async (req, res) => {
     try {
         const noteId = req.params.id;
 
-        // Find the note by ID
+   
         const note = await Note.findOne({ id: noteId });
 
         if (!note) {
@@ -120,10 +114,6 @@ app.get('/api/notes/:id', async (req, res) => {
     }
 });
 
-
-
-
-// Start the Express.js server
 app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`);
 });
