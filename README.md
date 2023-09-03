@@ -1,6 +1,6 @@
 # MindScribe - A Note-Taking Web Application
 
-MindScribe is a web-based note-taking application that allows users to create, view, edit, and delete notes. It also provides the functionality to share notes with others.
+MindScribe is a web-based note-taking application that allows users to create, view, edit, and delete and copy to clipBoard notes. It also provides the functionality to share notes with others.
 
 
 
