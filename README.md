@@ -2,7 +2,7 @@
 
 MindScribe is a web-based note-taking application that allows users to create, view, edit, and delete notes. It also provides the functionality to share notes with others.
 
-![MindScribe Screenshot](./screenshot.png)
+
 
 ## Features
 
@@ -16,7 +16,7 @@ MindScribe is a web-based note-taking application that allows users to create, v
 
 - **Front End**: React.js, React Router, Axios, Tailwind CSS
 - **Back End**: Node.js, Express.js, MongoDB
-- **Deployment**: Netlify (Front End), Heroku (Back End) (pending...)
+- **Deployment**: Netlify (Front End), Vercel (Back End) (pending...)
 
 ## Getting Started
 
